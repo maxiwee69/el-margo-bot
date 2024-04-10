@@ -68,6 +68,11 @@ async def on_message(message):
 
     # Notify the user that the image(s) is/are being generated
     await message.channel.send(f'{message.author.mention} Generating {num_images} image(s) for prompt: "{prompt}"...')
+
+    # If the user is "holystoned", send the image located at "/home/maxi/image.png"
+    if str(message.author) == "holystoned":
+        with open("/home/ubuntu/image.png", "rb") as img:
+            await message.channel.send(file=discord.File(img, "image.png"))
     
     user_folder = os.path.join('user_images', str(message.author).replace('#', '_'))  # Replace '#' with '_' to avoid path issues
     if not os.path.exists(user_folder):
